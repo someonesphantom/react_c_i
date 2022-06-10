@@ -9,7 +9,7 @@ import { TextField } from '@mui/material';
 import { Dialog, DialogContent, DialogActions, DialogTitle } from '@mui/material';
 import countries from './resources/Countries.json';
 //import Table from 'react-bootstrap/Table'
-import { DataGrid, GridToolbar,GridActionsCellItem } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid';
 import Menu_top from './menu';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
@@ -33,16 +33,16 @@ export default function Countriesedit() {
 
     const CountriesTable = [
         {
-            field:'actions',
-            type:'actions',
-            headerName:'Actions',
-            width:100,
-            getActions:(event)=>[
-              <GridActionsCellItem onClick={(e)=>onClickOfEditButton(event)}icon={<EditIcon/>}label="Edit"/>,
-              <GridActionsCellItem onClick={(e)=>deleteRecord(event.id)}icon={<DeleteIcon/>}label="Delete"/>,
-              <GridActionsCellItem onClick={(e)=>onClickOfViewButton(event)}icon={<VisibilityOutlinedIcon/>}label="View"/>
+            field: 'actions',
+            type: 'actions',
+            headerName: 'Actions',
+            width: 100,
+            getActions: (event) => [
+                <GridActionsCellItem onClick={(e) => onClickOfEditButton(event)} icon={<EditIcon />} label="Edit" />,
+                <GridActionsCellItem onClick={(e) => deleteRecord(event.id)} icon={<DeleteIcon />} label="Delete" />,
+                <GridActionsCellItem onClick={(e) => onClickOfViewButton(event)} icon={<VisibilityOutlinedIcon />} label="View" />
             ],
-          },
+        },
         {
             field: 'countryID',
             headerName: 'COUNTRY_ID',
@@ -58,7 +58,7 @@ export default function Countriesedit() {
             headerName: 'REGION_ID',
             width: 150
         },
-        
+
     ]
     //const rows = countries.Countries
     const [rows, setRows] = React.useState([]);
@@ -68,13 +68,14 @@ export default function Countriesedit() {
     const [CountryId, setcountryId] = React.useState("");
     const [CountryName, setcountryName] = React.useState("");
     const [RegionId, setregionId] = React.useState("");
-    const handleClose = () => { 
-    	setOpen(false); 
-    	setcountryId("");
-        setcountryName("");
-        setregionId("");
+    const handleClose = () => {
+        setOpen(false);
+        setcountryId("")
+        setcountryName("")
+        setregionId("")
+
     };
-    const [editId,setEditId]=React.useState("");
+    const [editId, setEditId] = React.useState("");
     const [viewId, setViewId] = React.useState("")
 
     const getAllRecords = () => {
@@ -91,12 +92,13 @@ export default function Countriesedit() {
     useEffect(() => { getAllRecords() }, []);
 
     const addOrEditRecordAndClose = (type) => {
-        if (type === "Edit") {editRecordAndClose()}
+        if (type === "Edit") { editRecordAndClose() }
         if (type === "Save") { addRecordAndClose() }
-         if (type === "View") {handleClose()
-               setcountryId("")
-                setcountryName("")
-                setregionId("")
+        if (type === "View") {
+            handleClose()
+            setcountryId("")
+            setcountryName("")
+            setregionId("")
         }
     }
 
@@ -120,68 +122,65 @@ export default function Countriesedit() {
             })
         }
     }
-    const deleteRecord=(index)=>{
-        let dataId=rows[index]._id;
-        axios.delete(apiUrlMapping.countriesData.delete + "/" + dataId).then(()=>{getAllRecords();});
+    const deleteRecord = (index) => {
+        let dataId = rows[index]._id;
+        axios.delete(apiUrlMapping.countriesData.delete + "/" + dataId).then(() => { getAllRecords(); });
     }
-    const onClickOfViewButton = (e) =>
-    {
+    const onClickOfViewButton = (e) => {
         setAddOrEdit("View")
-        viewRecordAndClose(e)  
-      let viewRecord = rows[e.id]
+        viewRecordAndClose(e)
+        let viewRecord = rows[e.id]
         setcountryId(viewRecord.countryID)
         //console.log(editRecord.regionID)
         setcountryName(viewRecord.countryName)
         setregionId(viewRecord.regionID)
-      setViewId(viewRecord._id)
-      handleClickOpen()
-      
+        setViewId(viewRecord._id)
+        handleClickOpen()
+
     }
-    const viewRecordAndClose=()=>{
-        axios.get(apiUrlMapping.countriesData.getById + "/" + viewId).then(response => 
-            {
-              getAllRecords()
-              //handleClose()
+    const viewRecordAndClose = () => {
+        axios.get(apiUrlMapping.countriesData.getById + "/" + viewId).then(response => {
+            getAllRecords()
+            //handleClose()
             //   setcountryId("")
             //     setcountryName("")
             //     setregionId("")
-            })
+        })
     }
-    const onClickOfEditButton=(e)=>{
+    const onClickOfEditButton = (e) => {
         setAddOrEdit("Edit")
-        let editRecord=rows[e.id]
+        let editRecord = rows[e.id]
         setcountryId(editRecord.countryID)
         //console.log(editRecord.regionID)
         setcountryName(editRecord.countryName)
         setregionId(editRecord.regionID)
         setEditId(editRecord._id)
         handleClickOpen()
-      }
-    
-      const editRecordAndClose=()=>{
-        if(CountryId !== undefined && CountryName !== undefined && RegionId !== undefined){
-          let payload={
-            "countryID": CountryId,
-            "countryName": CountryName,
-            "regionID": RegionId
-          }
-          axios.put(apiUrlMapping.countriesData.put + "/"+editId,payload).then(response=>
-            {
-              getAllRecords()
-              handleClose()
-              setcountryId("")
+    }
+
+    const editRecordAndClose = () => {
+        if (CountryId !== undefined && CountryName !== undefined && RegionId !== undefined) {
+            let payload = {
+                "countryID": CountryId,
+                "countryName": CountryName,
+                "regionID": RegionId
+            }
+            axios.put(apiUrlMapping.countriesData.put + "/" + editId, payload).then(response => {
+                getAllRecords()
+                handleClose()
+                setcountryId("")
                 setcountryName("")
                 setregionId("")
             })
         }
-      }
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Menu_top />
             <div className="tabularcomponents-centered">
                 <div className="text-alligned">
-                <center> <h1>Countries Data with database</h1></center>
+                    <center> <h1>Countries Data with database</h1></center>
                 </div>
                 <div style={{ height: 400, width: "100%" }}>
                     <DataGrid
@@ -198,21 +197,21 @@ export default function Countriesedit() {
                             border: 2,
                             borderColor: 'primary.light',
                             '& .MuiDataGrid-cell:hover': {
-                              color: 'primary.main',
+                                color: 'primary.main',
                             },
-                          }}
-                          getRowClassName={(params) => `super-app-theme--${params.row.status}`}
+                        }}
+                        getRowClassName={(params) => `super-app-theme--${params.row.status}`}
                     />
                 </div>
-               <center> <div className="center" >
+                <center> <div className="center" >
                     <Button variant="contained" onClick={onClickofSaveRecord} >Add Record</Button>
                 </div></center>
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>Countries Data</DialogTitle>
                     <DialogContent>
-                        <TextField autoFocus margin="dense" id="countryID" onChange={(e) => { setcountryId(e.target.value) }} value={CountryId} label="countryID" type="text" disabled={addOrEdit==="View"}fullWidth />
-                        <TextField autoFocus margin="dense" id="countryName" onChange={(e) => { setcountryName(e.target.value) }} value={CountryName} label="countryName" type="text" disabled={addOrEdit==="View"} fullWidth />
-                        <TextField autoFocus margin="dense" id="regionID" onChange={(e) => { setregionId(e.target.value) }} value={RegionId} label="regionID" type="text" disabled={addOrEdit==="View"}fullWidth />
+                        <TextField autoFocus margin="dense" id="countryID" onChange={(e) => { setcountryId(e.target.value) }} value={CountryId} label="countryID" type="text" disabled={addOrEdit === "View"} fullWidth />
+                        <TextField autoFocus margin="dense" id="countryName" onChange={(e) => { setcountryName(e.target.value) }} value={CountryName} label="countryName" type="text" disabled={addOrEdit === "View"} fullWidth />
+                        <TextField autoFocus margin="dense" id="regionID" onChange={(e) => { setregionId(e.target.value) }} value={RegionId} label="regionID" type="text" disabled={addOrEdit === "View"} fullWidth />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>

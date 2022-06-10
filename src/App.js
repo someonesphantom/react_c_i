@@ -9,6 +9,7 @@ import Calc from './calc';
 import Interest from './interest';
 import Countries from './countries';
 import Countriesedit from './CountriesEdit';
+import Flow from './reactFlow';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom'  
 const routing = (  
   <Router>  
@@ -21,6 +22,7 @@ const routing = (
       <Route exact path="/interest" element={<Interest />}/>
       <Route exact path="/countries" element={<Countries />}/>
       <Route exact path="/cEdit" element={<Countriesedit />}/>
+      <Route exact path='/reactflow' element = {<Flow />}/>
     </Routes>  
   </Router>  
 ) 

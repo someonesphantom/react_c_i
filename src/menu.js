@@ -54,6 +54,10 @@ export default function Menu_top() {
                                         e.preventDefault();
                                         window.location.href = '/cEdit';
                                     }}>Countries Data with database</MenuItem>
+                                    <MenuItem onClick={(e) => {
+                                        e.preventDefault();
+                                        window.location.href = '/reactflow';
+                                    }}>react flow</MenuItem>
                                 </Menu>
                             </React.Fragment>
                         )}
