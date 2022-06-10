@@ -68,7 +68,12 @@ export default function Countriesedit() {
     const [CountryId, setcountryId] = React.useState("");
     const [CountryName, setcountryName] = React.useState("");
     const [RegionId, setregionId] = React.useState("");
-    const handleClose = () => { setOpen(false); };
+    const handleClose = () => { 
+    	setOpen(false); 
+    	setcountryId("");
+        setcountryName("");
+        setregionId("");
+    };
     const [editId,setEditId]=React.useState("");
     const [viewId, setViewId] = React.useState("")
 
