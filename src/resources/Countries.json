@@ -1,0 +1,47 @@
+{
+    "Countries":[
+        {
+            "id":1,
+            "countryId":"CH",
+            "countryName":"Belgium",
+            "regionId":1
+
+        },
+        {
+            "id":2,
+            "countryId":"CH",
+            "countryName":"Switzerland",
+            "regionId":1
+
+        },
+        {
+            "id":3,
+            "countryId":"DE",
+            "countryName":"Germany",
+            "regionId":1
+
+        },
+        {
+            "id":4,
+            "countryId":"AR",
+            "countryName":"Argentina",
+            "regionId":2
+
+        },
+        {
+            "id":5,
+            "countryId":"BR",
+            "countryName":"Brazil",
+            "regionId":2
+
+        },
+        {
+            "id":6,
+            "countryId":"CA",
+            "countryName":"Canada",
+            "regionId":2
+
+        }
+
+    ]
+}

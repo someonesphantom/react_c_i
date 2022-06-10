@@ -1,0 +1,9 @@
+{
+    "countriesData": {
+        "getAll": "https://countriestable.herokuapp.com/api/v1/countries",
+        "post": "https://countriestable.herokuapp.com/api/v1/countries",
+        "put": "https://countriestable.herokuapp.com/api/v1/countries",
+        "delete": "https://countriestable.herokuapp.com/api/v1/countries",
+        "getById": "https://countriestable.herokuapp.com/api/v1/countries"
+    }
+}
